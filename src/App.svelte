@@ -7,7 +7,7 @@
   let temperatureScales = ["celsius", "fahrenheit", "kelvin"];
   let temperatureScale = "celsius";
   let growProfile = <GrowProfile>{
-    name: "",
+    name: "My Grow Profile",
     lighting: true,
     lights_off: 720,
     minimum_intake: 0,
