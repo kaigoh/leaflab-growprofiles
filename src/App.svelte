@@ -26,7 +26,11 @@
     vpd_night: 0,
   };
 
-  $: growProfile, generateQRCode(), storeProfile();
+  $: growProfile,
+    generateQRCode(),
+    storeProfile(),
+    calculateVPD("day"),
+    calculateVPD("night");
 
   let qrCode;
 
