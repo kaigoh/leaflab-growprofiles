@@ -162,8 +162,8 @@
 </script>
 
 <div class="pt-3">
-  <div class="row text-center mb-3">
-    <div class="col-sm">
+  <div class="row text-center mb-3 justify-content-sm-center">
+    <div class="col-sm-8">
       <img src="img/logo.svg" class="img-fluid mx-auto d-block" />
     </div>
   </div>
