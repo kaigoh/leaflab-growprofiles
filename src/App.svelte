@@ -229,7 +229,7 @@
           <div class="accordion-item">
             <h2 class="accordion-header">
               <button
-                class="accordion-button collapsed"
+                class="accordion-button"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseName"
@@ -246,7 +246,7 @@
             </h2>
             <div
               id="collapseName"
-              class="accordion-collapse collapse"
+              class="accordion-collapse collapse show"
               data-bs-parent="#growProfileSettings"
             >
               <div class="accordion-body">
