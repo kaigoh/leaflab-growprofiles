@@ -173,7 +173,7 @@
     </div>
   </div>
   <div class="container">
-    <div class="row pt-3">
+    <div class="row pt-3 row-cols-2">
       <div class="col-sm mb-3">
         <div class="card">
           <div class="card-body text-center" bind:offsetWidth={containerWidth}>
