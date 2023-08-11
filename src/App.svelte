@@ -821,4 +821,8 @@
   .no-accordion-icon:after {
     background-image: none !important;
   }
+
+  canvas {
+    width: 100%;
+  }
 </style>
