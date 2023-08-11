@@ -69,7 +69,7 @@
     localStorage.setItem("_leaflab_grow_profile", JSON.stringify(growProfile));
   }
 
-  let containerWidth;
+  let containerWidth = 80;
 
   $: containerWidth, generateQRCode();
 
