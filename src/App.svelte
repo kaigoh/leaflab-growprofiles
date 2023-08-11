@@ -172,283 +172,285 @@
       <h4>LeafLab Grow Profile Generator</h4>
     </div>
   </div>
-  <div class="row pt-3">
-    <div class="col mb-3">
-      <div class="card">
-        <div class="card-body text-center" bind:offsetWidth={containerWidth}>
-          <div id="qrcode" on:click={downloadQRCode} />
+  <div class="container">
+    <div class="row pt-3">
+      <div class="col-sm mb-3">
+        <div class="card">
+          <div class="card-body text-center" bind:offsetWidth={containerWidth}>
+            <div id="qrcode" on:click={downloadQRCode} />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col">
-      <form>
-        <div class="accordion" id="growProfileSettings">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTemperatureScale"
-                aria-expanded="true"
-                aria-controls="collapseTemperatureScale"
-              >
-                <div class="row">
-                  <div class="col-1">
-                    <i class="fa-solid fa-thermometer" />
-                  </div>
-                  <div class="col">Temperature Scale</div>
-                </div>
-              </button>
-            </h2>
-            <div
-              id="collapseTemperatureScale"
-              class="accordion-collapse collapse"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body">
-                <select
-                  class="form-select"
-                  id="$environmentTemperatureScale"
-                  bind:value={temperatureScale}
-                  on:change={() => {
-                    localStorage.setItem(
-                      "_leaflab_temperatureScale",
-                      temperatureScale
-                    );
-                  }}
+      <div class="col-sm">
+        <form>
+          <div class="accordion" id="growProfileSettings">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTemperatureScale"
+                  aria-expanded="true"
+                  aria-controls="collapseTemperatureScale"
                 >
-                  {#each temperatureScales as t}
-                    <option value={t}>{capitalizeFirstLetter(t)}</option>
-                  {/each}
-                </select>
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="fa-solid fa-thermometer" />
+                    </div>
+                    <div class="col">Temperature Scale</div>
+                  </div>
+                </button>
+              </h2>
+              <div
+                id="collapseTemperatureScale"
+                class="accordion-collapse collapse"
+                data-bs-parent="#growProfileSettings"
+              >
+                <div class="accordion-body">
+                  <select
+                    class="form-select"
+                    id="$environmentTemperatureScale"
+                    bind:value={temperatureScale}
+                    on:change={() => {
+                      localStorage.setItem(
+                        "_leaflab_temperatureScale",
+                        temperatureScale
+                      );
+                    }}
+                  >
+                    {#each temperatureScales as t}
+                      <option value={t}>{capitalizeFirstLetter(t)}</option>
+                    {/each}
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseName"
-                aria-expanded="true"
-                aria-controls="collapseName"
-              >
-                <div class="row">
-                  <div class="col-1">
-                    <i class="fa-solid fa-pencil" />
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseName"
+                  aria-expanded="true"
+                  aria-controls="collapseName"
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="fa-solid fa-pencil" />
+                    </div>
+                    <div class="col">Profile Name</div>
                   </div>
-                  <div class="col">Profile Name</div>
+                </button>
+              </h2>
+              <div
+                id="collapseName"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#growProfileSettings"
+              >
+                <div class="accordion-body">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="profileName"
+                    bind:value={growProfile.name}
+                  />
                 </div>
-              </button>
-            </h2>
-            <div
-              id="collapseName"
-              class="accordion-collapse collapse show"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="profileName"
-                  bind:value={growProfile.name}
-                />
               </div>
             </div>
-          </div>
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseLighting"
-                aria-expanded="true"
-                aria-controls="collapseLighting"
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseLighting"
+                  aria-expanded="true"
+                  aria-controls="collapseLighting"
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i
+                        class="fa-solid fa-lightbulb {growProfile.lighting
+                          ? 'text-warning'
+                          : 'text-secondary'}"
+                      />
+                    </div>
+                    <div class="col">Lighting</div>
+                  </div>
+                </button>
+              </h2>
+              <div
+                id="collapseLighting"
+                class="accordion-collapse collapse"
+                data-bs-parent="#growProfileSettings"
               >
-                <div class="row">
-                  <div class="col-1">
-                    <i
-                      class="fa-solid fa-lightbulb {growProfile.lighting
-                        ? 'text-warning'
-                        : 'text-secondary'}"
-                    />
-                  </div>
-                  <div class="col">Lighting</div>
-                </div>
-              </button>
-            </h2>
-            <div
-              id="collapseLighting"
-              class="accordion-collapse collapse"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body">
-                <div class="mb-2">
-                  <div class="form-check">
-                    <input
-                      class="form-check-input"
-                      type="checkbox"
-                      bind:checked={growProfile.lighting}
-                      id="profileLighting"
-                    />
-                    <label class="form-check-label" for="profileLighting">
-                      Lighting Enabled
-                    </label>
-                  </div>
-                </div>
-
-                {#if growProfile.lighting}
+                <div class="accordion-body">
                   <div class="mb-2">
-                    <label for="profileLightingDuration" class="form-label"
-                      >Lighting Duration
-                    </label>
-                    <input
-                      type="range"
-                      class="form-range"
-                      min="30"
-                      max="1440"
-                      step="30"
-                      id="profileLightingDuration"
-                      bind:value={growProfile.lights_off}
-                      aria-describedby="profileLightingDurationHelp"
-                    />
-                    <div
-                      class="row text-center"
-                      id="profileLightingDurationHelp"
-                    >
-                      <div class="col">
-                        <div class="form-text mt-0">
-                          On for {growProfile.lights_off / 60} Hours
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="form-text mt-0">
-                          Off for {24 - growProfile.lights_off / 60} Hours
-                        </div>
-                      </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        bind:checked={growProfile.lighting}
+                        id="profileLighting"
+                      />
+                      <label class="form-check-label" for="profileLighting">
+                        Lighting Enabled
+                      </label>
                     </div>
                   </div>
-                {/if}
-              </div>
-            </div>
-          </div>
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseAirflow"
-                aria-expanded="true"
-                aria-controls="collapseAirflow"
-              >
-                <div class="row">
-                  <div class="col-1">
-                    <i class="fa-solid fa-wind text-primary" />
-                  </div>
-                  <div class="col">Air Flow</div>
-                </div>
-              </button>
-            </h2>
-            <div
-              id="collapseAirflow"
-              class="accordion-collapse collapse"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body">
-                <div class="card mb-2">
-                  <div class="card-body">
-                    <h6 class="card-title">
-                      <i class="fa-solid fa-wind" /><i
-                        class="fa-regular fa-fan me-2"
-                      />Intake
-                    </h6>
+                  {#if growProfile.lighting}
                     <div class="mb-2">
+                      <label for="profileLightingDuration" class="form-label"
+                        >Lighting Duration
+                      </label>
                       <input
                         type="range"
                         class="form-range"
-                        min="0"
-                        max="100"
-                        step="10"
-                        id="profileIntake"
-                        bind:value={growProfile.minimum_intake}
-                        aria-describedby="profileIntakeHelp"
+                        min="30"
+                        max="1440"
+                        step="30"
+                        id="profileLightingDuration"
+                        bind:value={growProfile.lights_off}
+                        aria-describedby="profileLightingDurationHelp"
                       />
-                      <div class="row text-center" id="profileMinIntakeHelp">
+                      <div
+                        class="row text-center"
+                        id="profileLightingDurationHelp"
+                      >
                         <div class="col">
                           <div class="form-text mt-0">
-                            Minimum Intake {growProfile.minimum_intake}%
+                            On for {growProfile.lights_off / 60} Hours
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-text mt-0">
+                            Off for {24 - growProfile.lights_off / 60} Hours
                           </div>
                         </div>
                       </div>
+                    </div>
+                  {/if}
+                </div>
+              </div>
+            </div>
 
-                      <input
-                        type="range"
-                        class="form-range"
-                        min="0"
-                        max="100"
-                        step="10"
-                        id="profileMinIntake"
-                        bind:value={growProfile.maximum_intake}
-                        aria-describedby="profileMaxIntakeHelp"
-                      />
-                      <div class="row text-center" id="profileMaxIntakeHelp">
-                        <div class="col">
-                          <div class="form-text mt-0">
-                            Maximum Intake {growProfile.maximum_intake}%
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseAirflow"
+                  aria-expanded="true"
+                  aria-controls="collapseAirflow"
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="fa-solid fa-wind text-primary" />
+                    </div>
+                    <div class="col">Air Flow</div>
+                  </div>
+                </button>
+              </h2>
+              <div
+                id="collapseAirflow"
+                class="accordion-collapse collapse"
+                data-bs-parent="#growProfileSettings"
+              >
+                <div class="accordion-body">
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <h6 class="card-title">
+                        <i class="fa-solid fa-wind" /><i
+                          class="fa-regular fa-fan me-2"
+                        />Intake
+                      </h6>
+                      <div class="mb-2">
+                        <input
+                          type="range"
+                          class="form-range"
+                          min="0"
+                          max="100"
+                          step="10"
+                          id="profileIntake"
+                          bind:value={growProfile.minimum_intake}
+                          aria-describedby="profileIntakeHelp"
+                        />
+                        <div class="row text-center" id="profileMinIntakeHelp">
+                          <div class="col">
+                            <div class="form-text mt-0">
+                              Minimum Intake {growProfile.minimum_intake}%
+                            </div>
+                          </div>
+                        </div>
+
+                        <input
+                          type="range"
+                          class="form-range"
+                          min="0"
+                          max="100"
+                          step="10"
+                          id="profileMinIntake"
+                          bind:value={growProfile.maximum_intake}
+                          aria-describedby="profileMaxIntakeHelp"
+                        />
+                        <div class="row text-center" id="profileMaxIntakeHelp">
+                          <div class="col">
+                            <div class="form-text mt-0">
+                              Maximum Intake {growProfile.maximum_intake}%
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="card mb-2">
-                  <div class="card-body">
-                    <h6 class="card-title">
-                      <i class="fa-solid fa-fan" /><i
-                        class="fa-regular fa-wind me-2"
-                      />Exhaust
-                    </h6>
-                    <div class="mb-2">
-                      <input
-                        type="range"
-                        class="form-range"
-                        min="10"
-                        max="100"
-                        step="10"
-                        id="profileExhaust"
-                        bind:value={growProfile.minimum_exhaust}
-                        aria-describedby="profileMinExhaustHelp"
-                      />
-                      <div class="row text-center" id="profileMinExhaustHelp">
-                        <div class="col">
-                          <div class="form-text mt-0">
-                            Minimum Exhaust {growProfile.minimum_exhaust}%
+                  <div class="card mb-2">
+                    <div class="card-body">
+                      <h6 class="card-title">
+                        <i class="fa-solid fa-fan" /><i
+                          class="fa-regular fa-wind me-2"
+                        />Exhaust
+                      </h6>
+                      <div class="mb-2">
+                        <input
+                          type="range"
+                          class="form-range"
+                          min="10"
+                          max="100"
+                          step="10"
+                          id="profileExhaust"
+                          bind:value={growProfile.minimum_exhaust}
+                          aria-describedby="profileMinExhaustHelp"
+                        />
+                        <div class="row text-center" id="profileMinExhaustHelp">
+                          <div class="col">
+                            <div class="form-text mt-0">
+                              Minimum Exhaust {growProfile.minimum_exhaust}%
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      <input
-                        type="range"
-                        class="form-range"
-                        min="10"
-                        max="100"
-                        step="10"
-                        id="profileExhaust"
-                        bind:value={growProfile.maximum_exhaust}
-                        aria-describedby="profileMaxExhaustHelp"
-                      />
-                      <div class="row text-center" id="profileMaxExhaustHelp">
-                        <div class="col">
-                          <div class="form-text mt-0">
-                            Maximum Exhaust {growProfile.maximum_exhaust}%
+                        <input
+                          type="range"
+                          class="form-range"
+                          min="10"
+                          max="100"
+                          step="10"
+                          id="profileExhaust"
+                          bind:value={growProfile.maximum_exhaust}
+                          aria-describedby="profileMaxExhaustHelp"
+                        />
+                        <div class="row text-center" id="profileMaxExhaustHelp">
+                          <div class="col">
+                            <div class="form-text mt-0">
+                              Maximum Exhaust {growProfile.maximum_exhaust}%
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -457,366 +459,368 @@
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed no-accordion-icon"
-                type="button"
-                aria-expanded="true"
-                aria-controls="collapseTemperature"
-                disabled
-              >
-                <div class="row">
-                  <div class="col-1">
-                    <i class="fa-solid fa-water text-primary" />
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed no-accordion-icon"
+                  type="button"
+                  aria-expanded="true"
+                  aria-controls="collapseTemperature"
+                  disabled
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="fa-solid fa-water text-primary" />
+                    </div>
+                    <div class="col">
+                      VPD
+                      {#if !growProfile.lighting}
+                        {growProfile.vpd_night.toFixed(1)}kPa
+                      {:else if growProfile.lights_off == 1440}
+                        {growProfile.vpd_day.toFixed(1)}kPa
+                      {:else}
+                        <i
+                          class="fa-solid fa-sun text-warning ms-1 me-2"
+                        />{growProfile.vpd_day.toFixed(1)}kPa
+                        <span class="ms-1 me-1" />
+                        <i
+                          class="fa-solid fa-moon text-secondary ms-2 me-2"
+                        />{growProfile.vpd_night.toFixed(1)}kPa
+                      {/if}
+                    </div>
                   </div>
-                  <div class="col">
-                    VPD
-                    {#if !growProfile.lighting}
-                      {growProfile.vpd_night.toFixed(1)}kPa
-                    {:else if growProfile.lights_off == 1440}
-                      {growProfile.vpd_day.toFixed(1)}kPa
-                    {:else}
+                </button>
+              </h2>
+              <div
+                id="collapseVPD"
+                class="accordion-collapse collapse"
+                data-bs-parent="#growProfileSettings"
+              >
+                <div class="accordion-body" />
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTemperature"
+                  aria-expanded="true"
+                  aria-controls="collapseTemperature"
+                >
+                  <div class="row">
+                    <div class="col-1">
                       <i
-                        class="fa-solid fa-sun text-warning ms-1 me-2"
-                      />{growProfile.vpd_day.toFixed(1)}kPa
-                      <span class="ms-1 me-1" />
-                      <i
-                        class="fa-solid fa-moon text-secondary ms-2 me-2"
-                      />{growProfile.vpd_night.toFixed(1)}kPa
-                    {/if}
+                        class="fa-regular fa-temperature-high text-secondary"
+                      />
+                    </div>
+                    <div class="col">Temperature</div>
                   </div>
-                </div>
-              </button>
-            </h2>
-            <div
-              id="collapseVPD"
-              class="accordion-collapse collapse"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body" />
-            </div>
-          </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseTemperature"
-                aria-expanded="true"
-                aria-controls="collapseTemperature"
+                </button>
+              </h2>
+              <div
+                id="collapseTemperature"
+                class="accordion-collapse collapse"
+                data-bs-parent="#growProfileSettings"
               >
-                <div class="row">
-                  <div class="col-1">
-                    <i class="fa-regular fa-temperature-high text-secondary" />
-                  </div>
-                  <div class="col">Temperature</div>
+                <div class="accordion-body">
+                  {#if !growProfile.lighting}
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="mb-2">
+                          <TemperatureSelector
+                            id="profileTemperatureNight"
+                            scale={temperatureScale}
+                            bind:celsius={growProfile.temperature_night}
+                            bind:deviation={growProfile.temperature_night_allowed_deviation}
+                            on:temperature={() => calculateVPD("night")}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  {:else if growProfile.lights_off == 1440}
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <div class="mb-2">
+                          <TemperatureSelector
+                            id="profileTemperatureDay"
+                            scale={temperatureScale}
+                            bind:celsius={growProfile.temperature_day}
+                            bind:deviation={growProfile.temperature_day_allowed_deviation}
+                            on:temperature={() => calculateVPD("day")}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  {:else}
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <h6 class="card-title">
+                          <i class="fa-regular fa-sun text-warning me-2" />Day
+                        </h6>
+                        <div class="mb-2">
+                          <TemperatureSelector
+                            id="profileTemperatureDay"
+                            scale={temperatureScale}
+                            bind:celsius={growProfile.temperature_day}
+                            bind:deviation={growProfile.temperature_day_allowed_deviation}
+                            on:temperature={() => calculateVPD("day")}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card">
+                      <div class="card-body">
+                        <h6 class="card-title">
+                          <i class="fa-regular fa-moon me-2" />Night
+                        </h6>
+                        <div class="mb-2">
+                          <TemperatureSelector
+                            id="profileTemperatureNight"
+                            scale={temperatureScale}
+                            bind:celsius={growProfile.temperature_night}
+                            bind:deviation={growProfile.temperature_night_allowed_deviation}
+                            on:temperature={() => calculateVPD("night")}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  {/if}
                 </div>
-              </button>
-            </h2>
-            <div
-              id="collapseTemperature"
-              class="accordion-collapse collapse"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body">
-                {#if !growProfile.lighting}
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="mb-2">
-                        <TemperatureSelector
-                          id="profileTemperatureNight"
-                          scale={temperatureScale}
-                          bind:celsius={growProfile.temperature_night}
-                          bind:deviation={growProfile.temperature_night_allowed_deviation}
-                          on:temperature={() => calculateVPD("night")}
-                        />
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseHumidity"
+                  aria-expanded="true"
+                  aria-controls="collapseHumidity"
+                >
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="fa-solid fa-droplet text-info" />
+                    </div>
+                    <div class="col">Relative Humidity</div>
+                  </div>
+                </button>
+              </h2>
+              <div
+                id="collapseHumidity"
+                class="accordion-collapse collapse"
+                data-bs-parent="#growProfileSettings"
+              >
+                <div class="accordion-body">
+                  {#if !growProfile.lighting}
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="mb-2">
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="100"
+                            step="5"
+                            id="profileHumidityNight"
+                            bind:value={growProfile.relative_humidity_night}
+                            on:change={() => calculateVPD("night")}
+                            aria-describedby="profileHumidityNightHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityNightHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity {growProfile.relative_humidity_night}%
+                              </div>
+                            </div>
+                          </div>
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="10"
+                            step="1"
+                            id="profileHumidityNightAllowedDeviation"
+                            bind:value={growProfile.relative_humidity_night_allowed_deviation}
+                            aria-describedby="profileHumidityNightAllowedDeviationHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityNightAllowedDeviationHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity allowed deviation ± {growProfile.relative_humidity_night_allowed_deviation}%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                {:else if growProfile.lights_off == 1440}
-                  <div class="card mb-2">
-                    <div class="card-body">
-                      <div class="mb-2">
-                        <TemperatureSelector
-                          id="profileTemperatureDay"
-                          scale={temperatureScale}
-                          bind:celsius={growProfile.temperature_day}
-                          bind:deviation={growProfile.temperature_day_allowed_deviation}
-                          on:temperature={() => calculateVPD("day")}
-                        />
+                  {:else if growProfile.lights_off == 1440}
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <div class="mb-2">
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="100"
+                            step="5"
+                            id="profileHumidityDay"
+                            bind:value={growProfile.relative_humidity_day}
+                            on:change={() => calculateVPD("day")}
+                            aria-describedby="profileHumidityDayHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityDayHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity {growProfile.relative_humidity_day}%
+                              </div>
+                            </div>
+                          </div>
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="10"
+                            step="1"
+                            id="profileHumidityDayAllowedDeviation"
+                            bind:value={growProfile.relative_humidity_day_allowed_deviation}
+                            aria-describedby="profileHumidityDayAllowedDeviationHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityDayAllowedDeviationHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity allowed deviation ± {growProfile.relative_humidity_day_allowed_deviation}%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                {:else}
-                  <div class="card mb-2">
-                    <div class="card-body">
-                      <h6 class="card-title">
-                        <i class="fa-regular fa-sun text-warning me-2" />Day
-                      </h6>
-                      <div class="mb-2">
-                        <TemperatureSelector
-                          id="profileTemperatureDay"
-                          scale={temperatureScale}
-                          bind:celsius={growProfile.temperature_day}
-                          bind:deviation={growProfile.temperature_day_allowed_deviation}
-                          on:temperature={() => calculateVPD("day")}
-                        />
+                  {:else}
+                    <div class="card mb-2">
+                      <div class="card-body">
+                        <h6 class="card-title">
+                          <i class="fa-regular fa-sun text-warning me-2" />Day
+                        </h6>
+                        <div class="mb-2">
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="100"
+                            step="5"
+                            id="profileHumidityDay"
+                            bind:value={growProfile.relative_humidity_day}
+                            on:change={() => calculateVPD("day")}
+                            aria-describedby="profileHumidityDayHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityDayHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity {growProfile.relative_humidity_day}%
+                              </div>
+                            </div>
+                          </div>
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="10"
+                            step="1"
+                            id="profileHumidityDayAllowedDeviation"
+                            bind:value={growProfile.relative_humidity_day_allowed_deviation}
+                            aria-describedby="profileHumidityDayAllowedDeviationHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityDayAllowedDeviationHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity allowed deviation ± {growProfile.relative_humidity_day_allowed_deviation}%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <h6 class="card-title">
-                        <i class="fa-regular fa-moon me-2" />Night
-                      </h6>
-                      <div class="mb-2">
-                        <TemperatureSelector
-                          id="profileTemperatureNight"
-                          scale={temperatureScale}
-                          bind:celsius={growProfile.temperature_night}
-                          bind:deviation={growProfile.temperature_night_allowed_deviation}
-                          on:temperature={() => calculateVPD("night")}
-                        />
+                    <div class="card">
+                      <div class="card-body">
+                        <h6 class="card-title">
+                          <i class="fa-regular fa-moon me-2" />Night
+                        </h6>
+                        <div class="mb-2">
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="100"
+                            step="5"
+                            id="profileHumidityNight"
+                            bind:value={growProfile.relative_humidity_night}
+                            on:change={() => calculateVPD("night")}
+                            aria-describedby="profileHumidityNightHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityNightHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity {growProfile.relative_humidity_night}%
+                              </div>
+                            </div>
+                          </div>
+                          <input
+                            type="range"
+                            class="form-range"
+                            min="0"
+                            max="10"
+                            step="1"
+                            id="profileHumidityNightAllowedDeviation"
+                            bind:value={growProfile.relative_humidity_night_allowed_deviation}
+                            aria-describedby="profileHumidityNightAllowedDeviationHelp"
+                          />
+                          <div
+                            class="row text-center"
+                            id="profileHumidityNightAllowedDeviationHelp"
+                          >
+                            <div class="col">
+                              <div class="form-text mt-0">
+                                Relative Humidity allowed deviation ± {growProfile.relative_humidity_night_allowed_deviation}%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                {/if}
+                  {/if}
+                </div>
               </div>
             </div>
           </div>
-
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button
-                class="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#collapseHumidity"
-                aria-expanded="true"
-                aria-controls="collapseHumidity"
-              >
-                <div class="row">
-                  <div class="col-1">
-                    <i class="fa-solid fa-droplet text-info" />
-                  </div>
-                  <div class="col">Relative Humidity</div>
-                </div>
-              </button>
-            </h2>
-            <div
-              id="collapseHumidity"
-              class="accordion-collapse collapse"
-              data-bs-parent="#growProfileSettings"
-            >
-              <div class="accordion-body">
-                {#if !growProfile.lighting}
-                  <div class="card">
-                    <div class="card-body">
-                      <div class="mb-2">
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="100"
-                          step="5"
-                          id="profileHumidityNight"
-                          bind:value={growProfile.relative_humidity_night}
-                          on:change={() => calculateVPD("night")}
-                          aria-describedby="profileHumidityNightHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityNightHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity {growProfile.relative_humidity_night}%
-                            </div>
-                          </div>
-                        </div>
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="10"
-                          step="1"
-                          id="profileHumidityNightAllowedDeviation"
-                          bind:value={growProfile.relative_humidity_night_allowed_deviation}
-                          aria-describedby="profileHumidityNightAllowedDeviationHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityNightAllowedDeviationHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity allowed deviation ± {growProfile.relative_humidity_night_allowed_deviation}%
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                {:else if growProfile.lights_off == 1440}
-                  <div class="card mb-2">
-                    <div class="card-body">
-                      <div class="mb-2">
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="100"
-                          step="5"
-                          id="profileHumidityDay"
-                          bind:value={growProfile.relative_humidity_day}
-                          on:change={() => calculateVPD("day")}
-                          aria-describedby="profileHumidityDayHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityDayHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity {growProfile.relative_humidity_day}%
-                            </div>
-                          </div>
-                        </div>
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="10"
-                          step="1"
-                          id="profileHumidityDayAllowedDeviation"
-                          bind:value={growProfile.relative_humidity_day_allowed_deviation}
-                          aria-describedby="profileHumidityDayAllowedDeviationHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityDayAllowedDeviationHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity allowed deviation ± {growProfile.relative_humidity_day_allowed_deviation}%
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                {:else}
-                  <div class="card mb-2">
-                    <div class="card-body">
-                      <h6 class="card-title">
-                        <i class="fa-regular fa-sun text-warning me-2" />Day
-                      </h6>
-                      <div class="mb-2">
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="100"
-                          step="5"
-                          id="profileHumidityDay"
-                          bind:value={growProfile.relative_humidity_day}
-                          on:change={() => calculateVPD("day")}
-                          aria-describedby="profileHumidityDayHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityDayHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity {growProfile.relative_humidity_day}%
-                            </div>
-                          </div>
-                        </div>
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="10"
-                          step="1"
-                          id="profileHumidityDayAllowedDeviation"
-                          bind:value={growProfile.relative_humidity_day_allowed_deviation}
-                          aria-describedby="profileHumidityDayAllowedDeviationHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityDayAllowedDeviationHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity allowed deviation ± {growProfile.relative_humidity_day_allowed_deviation}%
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-body">
-                      <h6 class="card-title">
-                        <i class="fa-regular fa-moon me-2" />Night
-                      </h6>
-                      <div class="mb-2">
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="100"
-                          step="5"
-                          id="profileHumidityNight"
-                          bind:value={growProfile.relative_humidity_night}
-                          on:change={() => calculateVPD("night")}
-                          aria-describedby="profileHumidityNightHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityNightHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity {growProfile.relative_humidity_night}%
-                            </div>
-                          </div>
-                        </div>
-                        <input
-                          type="range"
-                          class="form-range"
-                          min="0"
-                          max="10"
-                          step="1"
-                          id="profileHumidityNightAllowedDeviation"
-                          bind:value={growProfile.relative_humidity_night_allowed_deviation}
-                          aria-describedby="profileHumidityNightAllowedDeviationHelp"
-                        />
-                        <div
-                          class="row text-center"
-                          id="profileHumidityNightAllowedDeviationHelp"
-                        >
-                          <div class="col">
-                            <div class="form-text mt-0">
-                              Relative Humidity allowed deviation ± {growProfile.relative_humidity_night_allowed_deviation}%
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                {/if}
-              </div>
-            </div>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>
