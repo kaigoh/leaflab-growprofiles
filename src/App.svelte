@@ -169,7 +169,7 @@
     </div>
   </div>
   <div class="row pt-3">
-    <div class="col">
+    <div class="col mb-3">
       <div class="card">
         <div class="card-body text-center">
           <div id="qrcode" on:click={downloadQRCode} />
