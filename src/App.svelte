@@ -69,13 +69,17 @@
     localStorage.setItem("_leaflab_grow_profile", JSON.stringify(growProfile));
   }
 
+  let containerWidth;
+
+  $: containerWidth, generateQRCode();
+
   function generateQRCode() {
     const separator = "|";
     const encodedString = Object.values(growProfile).join(separator);
 
     qrCode = new QRCodeStyling({
-      width: 270,
-      height: 270,
+      width: containerWidth * 0.9,
+      height: containerWidth * 0.9,
       data: encodedString,
       margin: 0,
       qrOptions: {
@@ -171,7 +175,7 @@
   <div class="row pt-3">
     <div class="col mb-3">
       <div class="card">
-        <div class="card-body text-center">
+        <div class="card-body text-center" bind:offsetWidth={containerWidth}>
           <div id="qrcode" on:click={downloadQRCode} />
         </div>
       </div>
@@ -820,9 +824,5 @@
 <style>
   .no-accordion-icon:after {
     background-image: none !important;
-  }
-
-  canvas {
-    width: 100%;
   }
 </style>
