@@ -173,7 +173,7 @@
     </div>
   </div>
   <div class="container">
-    <div class="row pt-3 row-cols-2">
+    <div class="row pt-3">
       <div class="col-sm mb-3">
         <div class="card">
           <div class="card-body text-center" bind:offsetWidth={containerWidth}>
@@ -181,7 +181,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm">
+      <div class="col-sm-8">
         <form>
           <div class="accordion" id="growProfileSettings">
             <div class="accordion-item">
