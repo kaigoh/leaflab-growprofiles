@@ -174,7 +174,7 @@
   </div>
   <div class="container">
     <div class="row pt-3">
-      <div class="col-sm mb-3">
+      <div class="col-sm-4 mb-3">
         <div class="card">
           <div class="card-body text-center" bind:offsetWidth={containerWidth}>
             <div id="qrcode" on:click={downloadQRCode} />
