@@ -160,7 +160,7 @@
 <div class="pt-3">
   <div class="row text-center mb-3">
     <div class="col">
-      <img src="img/logo-small.png" class="img" />
+      <img src="img/logo.svg" class="img-fluid" />
     </div>
   </div>
   <div class="row text-center">
