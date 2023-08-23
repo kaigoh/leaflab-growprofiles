@@ -26,11 +26,7 @@
     vpd_night: 0,
   };
 
-  $: growProfile,
-    generateQRCode(),
-    storeProfile(),
-    calculateVPD("day"),
-    calculateVPD("night");
+  $: growProfile, generateQRCode(), calculateVPD("day"), calculateVPD("night");
 
   let qrCode;
 
@@ -182,7 +178,7 @@
         </div>
       </div>
       <div class="col-sm-8">
-        <form>
+        <form on:change={storeProfile}>
           <div class="accordion" id="growProfileSettings">
             <div class="accordion-item">
               <h2 class="accordion-header">
